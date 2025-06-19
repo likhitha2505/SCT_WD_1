@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shoe Store Landing Page</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #001f4d; /* Dark Blue */
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 30px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s, border-bottom 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #00d1ff;
+      border-bottom: 2px solid #00d1ff;
+    }
+
+    section {
+      padding: 100px 50px;
+      min-height: 100vh;
+    }
+
+    .hero {
+      background: #d4edda; /* Light green */
+      color: #000;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .hero img {
+  margin-top: 20px;
+  max-width: 400px; /* Medium size */
+  height: auto;
+  border-radius: 8px;
+}
+
+    .products {
+      background: #fcd6d6; /* Light pink */
+      text-align: center;
+    }
+
+    .products h2 {
+      margin-bottom: 30px;
+      color: #111;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .product {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      width: 260px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .product h3 {
+      margin: 10px 0 5px;
+      color: #333;
+    }
+
+    .product p {
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      color: #e91e63;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .buy-btn {
+      background: #00d1ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .buy-btn:hover {
+      background: #009fcf;
+    }
+
+    .contact {
+      background: #d6eaff; /* Light blue */
+      color: #000;
+    }
+
+    .contact h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .contact p {
+      font-size: 18px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    form input,
+    form textarea {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #999;
+      border-radius: 5px;
+      resize: none;
+    }
+
+    form button {
+      background: #00d1ff;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: #008cba;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #00d1ff;
+      color: #fff;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 50%;
+      font-size: 18px;
+      display: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    #paymentModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #paymentModal .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    #closeModal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    #paymentModal form input,
+    #paymentModal form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+
+    #paymentModal form button {
+      width: 100%;
+      padding: 10px;
+      background: #00d1ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        background: #222;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        display: none;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+      }
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="navbar">
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/894/894882.png" alt="Logo">
+      ShoeStore
+    </div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+    <nav>
+      <ul id="nav-list">
+        <li><a href="#">Home</a></li>
+        <li><a href="#products">Shoes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Welcome to All in One Shoe Store</h1>
+    <p>Stylish. Comfortable. Affordable.</p>
+     <img src="https://bing.com/th/id/BCO.9c460f05-8ece-4fdd-8d59-155ea7a72ae0.png" alt="Shoe Store Logo">
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+    <h2>Our Shoes</h2>
+    <div class="product-grid">
+      <div class="product">
+        <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/418ad1d1-1372-4464-be1a-686216972617/interact-run-road-running-shoes-c21XPX.png" alt="Shoe 1">
+        <h3>Running Shoes</h3>
+        <p>Lightweight and breathable shoes for daily running.</p>
+        <p class="price">₹2,499</p>
+        <button class="buy-btn">Buy Now</button>
+      </div>
+      <div class="product">
+        <img src="https://tse3.mm.bing.net/th?id=OIP.35m6OvW1Hq4iZM2sknZbnwHaHa&pid=Api&P=0&h=180" alt="Shoe 2">
+        <h3>Formal Shoes</h3>
+        <p>Classic shoes perfect for meetings and events.</p>
+        <p class="price">₹3,999</p>
+        <button class="buy-btn">Buy Now</button>
+      </div>
+      <div class="product">
+        <img src="https://tse4.mm.bing.net/th?id=OIP.yl1opQ3CQTbgGv8xvtTdMAHaHa&pid=Api&P=0&h=180" alt="Shoe 3">
+        <h3>Casual Sneakers</h3>
+        <p>Trendy sneakers for everyday use.</p>
+        <p class="price">₹1,799</p>
+        <button class="buy-btn">Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p><strong>Email:</strong> Allinone@shoes.com</p>
+    <p><strong>Phone:</strong> +91 98765 43210</p>
+    <p><strong>Address:</strong> Bachupally street, Hyderabad, India</p>
+
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="4" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- PAYMENT MODAL -->
+  <div id="paymentModal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h3>Payment Details</h3>
+      <form id="paymentForm">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <select required>
+          <option value="">Select Payment Method</option>
+          <option>UPI</option>
+          <option>Credit Card</option>
+          <option>Debit Card</option>
+          <option>Cash on Delivery</option>
+        </select>
+        <button type="submit">Pay Now</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCROLL TO TOP -->
+  <button class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></button>
+
+  <!-- SCRIPTS -->
+  <script>
+    const navbar = document.getElementById('navbar');
+    const toggle = document.getElementById('menu-toggle');
+    const navList = document.getElementById('nav-list');
+    const scrollTopBtn = document.getElementById('scrollTop');
+    const paymentModal = document.getElementById("paymentModal");
+    const closeModal = document.getElementById("closeModal");
+    const buyButtons = document.querySelectorAll(".buy-btn");
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+      scrollTopBtn.style.display = window.scrollY > 50 ? 'block' : 'none';
+    });
+
+    toggle.addEventListener('click', () => {
+      navList.classList.toggle('active');
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    buyButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        paymentModal.style.display = "flex";
+      });
+    });
+
+    closeModal.addEventListener("click", () => {
+      paymentModal.style.display = "none";
+    });
+
+    document.getElementById("paymentForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Payment successful! Thank you for your purchase.");
+      paymentModal.style.display = "none";
+    });
+  </script>
+</body>
+</html>
